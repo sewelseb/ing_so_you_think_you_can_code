@@ -24,28 +24,30 @@ router.post('/login', function(req, res, next) {
 	  path: '/ibmlgeef/sb/ing/pdm/party/22'
 	};
 
-	var req = http.get(options, function(res) {
-	  console.log('STATUS: ' + res.statusCode);
+	var reqI = http.get(options, function(res2) {
+	  console.log('STATUS: ' + res2.statusCode);
 	  console.log('HEADERS: ' + JSON.stringify(res.headers));
 
 	  // Buffer the body entirely for processing as a whole.
 	  var bodyChunks = [];
-	  res.on('data', function(chunk) {
+	  res2.on('data', function(chunk) {
 	    // You can process streamed parts here...
 	    bodyChunks.push(chunk);
 	  }).on('end', function() {
 	    var body = Buffer.concat(bodyChunks);
 	    console.log('BODY: ' + body);
 	    // ...and/or process the entire body here.
+	    if(req.body.id < 10) {
+			res.render('startup/dashboard', { title: 'Express' });
+		} else {
+			res.render('client/dashboard', { title: 'Express' });
+		}
 	  })
 	});
 
-	req.on('error', function(e) {
+	reqI.on('error', function(e) {
 	  console.log('ERROR: ' + e.message);
 	});
-
-	res.redirect('/');
-
 });
 
 router.get('/about', function(req, res, next) {

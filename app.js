@@ -9,8 +9,12 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var manager = require('./routes/manager');
+
 var generateManager = require('./routes/generateManager');
 //var managerSigninIn = require('./routes/managerSigninIn');
+
+var startup = require('./routes/startup');
+
 
 var app = express();
 
@@ -37,8 +41,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/manager', manager);
+
 app.use('/generateManager', generateManager);
 //app.use('/manager/signin-in', managerSignIn);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -71,20 +77,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-var host = "localhost";
-var port= 3000;
-var env;
-if (process.env.hasOwnProperty("VCAP_SERVICES")) {
-  // Running on Bluemix. Parse out the port and host that we've been assigned.
-   env = JSON.parse(process.env.VCAP_SERVICES);
-   host = process.env.VCAP_APP_HOST;
-   port = process.env.VCAP_APP_PORT;
-
-
- 
-}
-
-
 var isWin = /^win/.test(process.platform);
 if (isWin)
 {
@@ -94,4 +86,3 @@ else
 {
   module.exports = app;
 }
-
