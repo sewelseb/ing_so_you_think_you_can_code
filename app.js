@@ -80,4 +80,5 @@ if (process.env.hasOwnProperty("VCAP_SERVICES")) {
  
 }
 
-module.exports = app.listen(port);
+//module.exports = app.listen(port);
+module.exports = app;
