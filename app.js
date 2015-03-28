@@ -65,8 +65,4 @@ app.use(function(err, req, res, next) {
   });
 });
 
-
 module.exports = app;
-module.exports = app.listen(3000, function(){
-   console.log('serveur en fonctionement sur le port 3000');
-});
