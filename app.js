@@ -103,8 +103,11 @@ app.post('/register', routes.registerAction);
 app.get('/login', routes.loginShow); //manager
 app.post('/login', routes.loginAction); //manager
 app.get('/logout', routes.logoutAction);
-app.get('/signin', routes.signinShow); //manager
-app.post('/signin', routes.signinAction); //manager
+app.get('/signin', routes.signinShow); //client
+app.post('/signin', routes.signinAction); //client
+app.get('/about', routes.aboutShow);
+//app.get('/about', routes.aboutShow);
+
 
 app.get('/dashboard', routes.dashboardShow);
 app.get('/play', routes.playShow);

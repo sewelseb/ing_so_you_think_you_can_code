@@ -86,11 +86,9 @@ exports.signinAction = function (req, res, next) {
     port: 1131,
     host: '159.8.142.102',
     method: 'GET',
-    path: '/ibmlgeef/sb/ing/pdm/party/'+req.body.id
+    path: '/ibmlgeef/sb/ing/pdm/party/'+req.body.identifiant
   };
 
-  console.log(options);
-  
   var reqI = http.get(options, function(res2) {
     console.log('STATUS: ' + res2.statusCode);
     console.log('HEADERS: ' + JSON.stringify(res.headers));
@@ -120,6 +118,13 @@ exports.signinAction = function (req, res, next) {
 exports.logoutAction = function (req, res, next) {
   req.session.destroy();
   res.redirect('/');
+}
+
+exports.aboutShow = function (req, res, next) {
+  res.render( 'about', {
+        title : 'about',
+        req   : req
+    });
 }
 
 exports.dashboardShow = function ( req, res, next ){
