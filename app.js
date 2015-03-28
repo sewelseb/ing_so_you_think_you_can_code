@@ -82,7 +82,7 @@ if (process.env.hasOwnProperty("VCAP_SERVICES")) {
 
 
 
-app.set('port', process.env.PORT || port);
+app.set('port', port);
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
