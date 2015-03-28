@@ -1,0 +1,9 @@
+---
+applications:
+- name: INGVestor
+  host: ingvestor
+ 
+ path: .
+ domain: eu-gb.mybluemix.net
+ instances: 1
+ memory: 256MB
