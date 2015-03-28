@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var manager = require('./routes/manager');
+var startup = require('./routes/startup');
 
 var generateManager = require('./routes/generateManager');
 //var managerSigninIn = require('./routes/managerSigninIn');
@@ -41,6 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/manager', manager);
+app.use('/startup', startup);
 
 app.use('/generateManager', generateManager);
 //app.use('/manager/signin-in', managerSignIn);
