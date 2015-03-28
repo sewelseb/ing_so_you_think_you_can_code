@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var manager = require('./routes/manager');
+var generateManager = require('./routes/generateManager');
 //var managerSigninIn = require('./routes/managerSigninIn');
 
 var app = express();
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/manager', manager);
+app.use('/generateManager', generateManager);
 //app.use('/manager/signin-in', managerSignIn);
 
 // catch 404 and forward to error handler

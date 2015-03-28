@@ -61,5 +61,8 @@ router.get('/demoboot', function(req, res, next) {
 router.get('/manager/signin-in', function(req, res, next) {
   res.render('managerSignIn', { title: 'Express' });
 });
+router.get('/generateManager', function(req, res, next) {
+  res.render('generateManager', { title: 'Express' });
+});
 
 module.exports = router;
