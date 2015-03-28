@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{title}}{% endblock %}
+{% block css %}
+    <link href="css/modern-business.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    {% if {{ error }} %}
+    <div class="alert alert-error">
+        {{ error }}
+    </div>
+    {% endif %}
+    {% if {{ success }} %}
+    <div class="alert alert-success">
+        {{ success }}
+    </div>
+    {% endif %}
+
+
+
+
+    <!-- Page Content -->
+
+
+
+{% endblock %}
