@@ -8,36 +8,48 @@
     <meta name="author" content="">
 
     <link href="/stylesheets/style.css" rel="stylesheet">
-    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
 
     {% block css %}{% endblock %}
     {% block js %}{% endblock %}
 
 </head>
 <body>
-
-    <div class="navbar navbar-inverse navbar-fixed-top">
-          <div class="navbar-inner">
-            <div class="container">
-              <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </a>
-              <a class="brand" href="./">FroggerJS</a>
-              <div class="nav-collapse">
-                <ul class="nav">
-                  {% if !req.session.userId %}
-                  <li><a href="./"><i class="icon-home icon-white"></i> Home</a></li>
-                  <li><a href="/register"><i class="icon-plus-sign icon-white"></i> Register</a></li>
-                  {% else %}
-                    <li><a href="./dashboard"><i class="icon-home icon-white"></i> Dashboard</a></li>
-                    <li><a href="/statistic"><i class="icon-star icon-white"></i> Statistics</a></li>
-                    <li><a href="/play"><i class="icon-play icon-white"></i> Play</a></li>
-                    <li><a href="/user"><i class="icon-user icon-white"></i> User</a></li>
-                  {% endif %}
-                </ul>
-                  {% if !req.session.userId %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">INGVestor</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              {{session.length}}
+              {% if session.length %}
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+              {% endif %}
+            </li>
+          </ul>
+          {% if !req.session.userId %}
                   <form class="navbar-form pull-right" action="/login" method="post">
                     <input type="text" class="input-small" name="mail" placeholder="Email">
                     <input type="password" class="input-small" name="password" placeholder="Password">
@@ -46,10 +58,14 @@
                   {% else %}
                     <a href="/logout" class="btn btn-primary pull-right"><i class="icon-off icon-white"></i> Logout</a>
                   {% endif %}
-              </div><!-- /.nav-collapse -->
-            </div><!-- /.container -->
-          </div><!-- /navbar-inner -->
-        </div><!-- /navbar -->
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+
+
+
+   
 
     <div class="container">
         <div class="page-header">
@@ -57,9 +73,8 @@
         </div>
     </div>
 
-    <script src="http://code.jquery.com/jquery-2.0.1.min.js"></script>
-    <script src="/javascripts/bootstrap.min.js"></script>
-
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 </body>
 </html>
