@@ -100,9 +100,11 @@ if ('development' == app.get('env')) {
 app.get('/', routes.indexShow);
 app.get('/register', routes.registerShow);
 app.post('/register', routes.registerAction);
-app.get('/login', routes.loginShow);
-app.post('/login', routes.loginAction);
+app.get('/login', routes.loginShow); //manager
+app.post('/login', routes.loginAction); //manager
 app.get('/logout', routes.logoutAction);
+app.get('/signin', routes.signinShow); //manager
+app.post('/signin', routes.signinAction); //manager
 
 app.get('/dashboard', routes.dashboardShow);
 app.get('/play', routes.playShow);

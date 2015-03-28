@@ -72,6 +72,17 @@ exports.loginAction = function (req, res, next) {
     });
 };
 
+exports.signinShow = function (req, res, next) {
+  res.render( 'signin', {
+        title : 'signin',
+        req   : req
+    });
+};
+
+exports.signinAction = function (req, res, next) {
+  console.log("signin");
+};
+
 exports.logoutAction = function (req, res, next) {
   req.session.destroy();
   res.redirect('/');

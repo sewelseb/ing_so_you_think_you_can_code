@@ -11,5 +11,3 @@ var Statistic = new Schema({
 });
  
 mongoose.model( 'Statistic', Statistic );
- 
-//mongoose.connect( 'localhost','FroggerJS' );
