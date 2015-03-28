@@ -3,16 +3,24 @@
 {% block title %}{{title}}{% endblock %}
 
 {% block content %}
-	Ajouter un projet
-	<form method="POST" action="/startup/dashboardNew">
-		<input type="text" name="name" /><br />
-		<input type="text" name="description " /><br />
 
-		<input type="submit" value="go" />
-	</form>
+{% if users|length > 1 %}
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addAProject" style="background-color:#FF6600; border-color:#FF6600;">
+  		Add a project
+	</button>
+{% else %}
+	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addAProject" style="background-color:#FF6600; border-color:#FF6600; width=100m">
+  		Add a project
+	</button>
+{% endif %}
+
+		                    
+            
+	
+	
 
 
-	Fund a project
+	<!-- Fund a project
 	<form method="POST" action="/client/funding">
 		<input type="text" name="startup" /><br />
 		<input type="text" name="money" /><br />
@@ -20,8 +28,48 @@
 
 		<input type="submit" value="go" />
 	</form>
-	vos projets
+	vos projets -->
 
+
+	<!-- Modales -->
+	<div class="modal fade" id="addAProject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header" style="background-color:#FF6600; ">
+	      	<div >
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel" style="color: white;">Add a project</h4>
+	        </div>
+	      </div>
+	      <div class="modal-body">
+	        <div style="padding-top:30px" class="panel-body" >
+
+	            <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+	                <form method="POST" action="/startup/dashboardNew" class="form-horizontal" role="form">
+	                	<div style="margin-bottom: 25px" class="input-group">
+	                                <span class="input-group-addon"><i class="glyphicon glyphicon-hand-right"></i></span>
+									<input type="text" name="name" class="form-control" placeholder="name"/><br />
+						</div>
+						 <div style="margin-bottom: 25px" class="input-group">
+	                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+	                                <textarea id="login-password"  class="form-control" name="description " placeholder="Description..."></textarea>
+	                    	</div>
+						
+	                    	  <div class="col-sm-12 controls" style="text-align: right;">
+	                              <input type="submit" id="btn-login" href="#" class="btn btn-success" style="background-color:#FF6600; border-color:#FF6600;  align: right;" value="Go!" />
+
+	                            </div>
+						
+					</form>
+				</div>
+
+
+            </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+	
 	{% for startup in startups %}
 	  {% if loop.first %}<ul>{% endif %}
 	  	<li>{{ startup.name }}</li>
