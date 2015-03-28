@@ -2,12 +2,6 @@ var express = require('express');
 
 var mongo = require('mongodb');
 
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 4b286dabd44676e604fcf54ba1ad4dc3f426a62b
 //var mongo = require('mongodb');
 //var mongoose = require('mongoose');
 
@@ -18,11 +12,6 @@ var router = express.Router();
 //mongoose.connect('mongodb://username:9c92fbaa-ab9b-41ce-9327-364fd9d00115@159.8.128.87:10563/ingvestor');
 //db.on('error', console.log('connection error'));
 
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 4b286dabd44676e604fcf54ba1ad4dc3f426a62b
 router.post('/', function(req, res, next) {
   // var db = mongoose.connection;
   
