@@ -60,5 +60,8 @@ router.get('/contact', function(req, res, next) {
 router.get('/demoboot', function(req, res, next) {
   res.render('public/demoboot', { title: 'Express' });
 });
+router.get('/manager/signin-in', function(req, res, next) {
+  res.render('managerSignIn', { title: 'Express' });
+});
 
 module.exports = router;
