@@ -47,6 +47,13 @@ exports.registerAction = function ( req, res, next ){
   });
 };
 
+exports.loginShow = function (req, res, next) {
+  res.render( 'login', {
+        title : 'login',
+        req   : req
+    });
+};
+
 exports.loginAction = function (req, res, next) {
   User.
     findOne({mail: req.body.mail, password: crypto.createHmac('sha1', "bibinoulelapinou").update(req.body.password).digest('hex')}).
