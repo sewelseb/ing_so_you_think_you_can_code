@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var manager = require('./routes/manager');
+var newManager = require('./routes/newManager');
 
 var generateManager = require('./routes/generateManager');
 //var managerSigninIn = require('./routes/managerSigninIn');
@@ -43,6 +44,8 @@ app.use('/users', users);
 app.use('/manager', manager);
 
 app.use('/generateManager', generateManager);
+app.use('/newManager', newManager);
+
 //app.use('/manager/signin-in', managerSignIn);
 
 
