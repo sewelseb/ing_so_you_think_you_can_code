@@ -77,6 +77,22 @@ app.use(function(err, req, res, next) {
   });
 });
 
+
+var host = "localhost";
+var port= 3000;
+var env;
+if (process.env.hasOwnProperty("VCAP_SERVICES")) {
+  // Running on Bluemix. Parse out the port and host that we've been assigned.
+   env = JSON.parse(process.env.VCAP_SERVICES);
+   host = process.env.VCAP_APP_HOST;
+   port = process.env.VCAP_APP_PORT;
+
+
+ 
+}
+
+
+
 var isWin = /^win/.test(process.platform);
 if (isWin)
 {
