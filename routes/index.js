@@ -74,6 +74,7 @@ router.get('/generateManager', function(req, res, next) {
 
 router.get('/logout', function(req, res, next) {
 	req.session.destroy;
+	console.log("destroy");
   	res.redirect('/');
 });
 
