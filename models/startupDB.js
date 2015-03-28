@@ -6,6 +6,7 @@ var Startup = new Schema({
     managerId		: String,
     description		: String,
     updated_at 	: Date,
+    sector: String,
     isValid	: Boolean
 });
  

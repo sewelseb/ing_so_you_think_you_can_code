@@ -7,6 +7,7 @@ var express = require('express')
   , userDB = require('./models/userDB')
   , statisticDB = require('./models/statisticDB')
   , startupDB = require('./models/startupDB')
+  , statisticDB = require('./models/statisticDB')
   , routes = require('./routes')
   , http = require('http')
   , swig = require('swig')
@@ -119,8 +120,9 @@ app.get('/statistic', routes.statShow);
 app.get('/users', routes.usersShow);
 
 app.get('/startup/dashboard', routes.startupShow);
-app.post('/startup/dashboard', routes.startupAction);
+app.post('/startup/dashboardNew', routes.startupAction);
 app.get('/client/dashboard', routes.clientShow);
+app.post('/client/funding', routes.fundAction);
 
 
 http.createServer(app).listen(app.get('port'), function(){

@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+	Ajouter un projet
+	<form method="POST" action="/startup/dashboardNew">
+		<input type="text" name="name" /><br />
+		<input type="text" name="description " /><br />
+
+		<input type="submit" value="go" />
+	</form>
+
+
+	Fund a project
+	<form method="POST" action="/client/funding">
+		<input type="text" name="startup" /><br />
+		<input type="text" name="money" /><br />
+		<input type="text" name="sector" /><br />
+
+		<input type="submit" value="go" />
+	</form>
+	vos projets
+
+	{% for startup in startups %}
+	  {% if loop.first %}<ul>{% endif %}
+	  	<li>{{ startup.name }}</li>
+	  {% if loop.last %}</ul>{% endif %}
+	{% endfor %}
+{% endblock %}
+

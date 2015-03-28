@@ -2,12 +2,11 @@ var mongoose = require( 'mongoose' );
 var Schema   = mongoose.Schema;
  
 var Statistic = new Schema({
-    result    	: String,
-    lilies		: String,
-    time		: String,
-    best		: String,
-    userId		: String,
-    updated_at 	: Date
+    projectId    	: String,
+    clientId		: String,
+    money		: String,
+    updated_at 	: Date,
+    sector: String
 });
  
 mongoose.model( 'Statistic', Statistic );

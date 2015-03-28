@@ -6,6 +6,7 @@ var mongoose = require( 'mongoose' );
 var ObjectId = mongoose.Types.ObjectId; 
 var User = mongoose.model( 'User' );
 var Startup = mongoose.model( 'Startup' );
+var Statistic = mongoose.model( 'Statistic' );
 var utils = require( 'connect' ).utils;
 var crypto = require('crypto');
 var http = require('http');
@@ -240,7 +241,7 @@ exports.statShow = function ( req, res, next ){
 exports.startupShow = function ( req, res, next ){
   if(!req.session.userId || req.session.type != "startup") res.redirect('/');
   Startup.
-    find({ 'userId': req.session.userId}).
+    find({ 'managerId': req.session.userId}).
     sort( '-updated_at' ).
     exec( function ( err, startups ){
       if( err ) return next( err );
@@ -248,21 +249,34 @@ exports.startupShow = function ( req, res, next ){
       res.render( 'startup', {
           title : 'Startup',
           req   : req,
-          startup : startups
+          startups : startups
       });
     });
 };
 
 exports.startupAction = function ( req, res, next ){
+  //check reload liste project
   if(!req.session.userId || req.session.type != "startup") res.redirect('/');
   new Startup({
       name        : req.body.name,
       managerId    : req.session.userId,
-      description     : 0,
+      description     : req.body.description,
       updated_at  : Date.now(),
-      isValid   : 3
+      isValid   : true
   }).save( function ( err, user, count ){
     if( err ) {
+      Startup.
+    find({ 'managerId': req.session.userId}).
+    sort( '-updated_at' ).
+    exec( function ( err, startups ){
+      if( err ) return next( err );
+
+      res.render( 'startup', {
+          title : 'Startup',
+          req   : req,
+          startups : startups
+      });
+    });
       res.render( 'startup', {
         title : 'startup',
         req   : req,
@@ -283,7 +297,34 @@ exports.clientShow = function ( req, res, next ){
   console.log("client");
 };
 
-
+exports.fundAction = function ( req, res, next ){
+  //check reload liste project
+  if(!req.session.userId) res.redirect('/');
+  console.log(req.body.money);
+  new Statistic({
+      projectId        : req.body.startup,
+      clientId    : req.session.userId,
+      money     : req.body.money,
+      updated_at  : Date.now(),
+      sector   : req.body.sector
+  }).save( function ( err, user, count ){
+    console.log("stats");
+    if( err ) {
+      res.render( 'startup', {
+        title : 'startup',
+        req   : req,
+        error : err
+      });
+    }
+    else {
+      res.render( 'startup', {
+        title : 'startup',
+        req   : req,
+        success : "Votre startup vient d'être crée avec succès !"
+      });
+    }
+  });
+};
 
 
 
