@@ -10,7 +10,11 @@ var session = require('express-session');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var manager = require('./routes/manager');
+
+var newManager = require('./routes/newManager');
+
 var startup = require('./routes/startup');
+
 
 var generateManager = require('./routes/generateManager');
 //var managerSigninIn = require('./routes/managerSigninIn');
@@ -47,6 +51,8 @@ app.use('/manager', manager);
 app.use('/startup', startup);
 
 app.use('/generateManager', generateManager);
+app.use('/newManager', newManager);
+
 //app.use('/manager/signin-in', managerSignIn);
 
 

@@ -71,4 +71,5 @@ router.get('/generateManager', function(req, res, next) {
   res.render('generateManager', { title: 'Express' });
 });
 
+
 module.exports = router;
