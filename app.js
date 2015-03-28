@@ -82,5 +82,14 @@ if (process.env.hasOwnProperty("VCAP_SERVICES")) {
  
 }
 
-//module.exports = app.listen(port);
-module.exports = app;
+
+var isWin = /^win/.test(process.platform);
+if (isWin)
+{
+  module.exports = app.listen(port);
+}
+else
+{
+  module.exports = app;
+}
+
