@@ -38,9 +38,9 @@ router.post('/login', function(req, res, next) {
 	    console.log('BODY: ' + body);
 	    // ...and/or process the entire body here.
 	    if(req.body.id < 10) {
-			res.render('startup/dashboard', { title: 'Express' });
+			res.redirect('startup/dashboard');
 		} else {
-			res.render('client/dashboard', { title: 'Express' });
+			res.redirect('client/dashboard');
 		}
 	  })
 	});
