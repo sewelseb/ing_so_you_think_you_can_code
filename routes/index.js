@@ -21,7 +21,7 @@ router.post('/login', function(req, res, next) {
 	  port: 1131,
 	  host: '159.8.142.102',
 	  method: 'GET',
-	  path: '/ibmlgeef/sb/ing/pdm/party/22'
+	  path: '/ibmlgeef/sb/ing/pdm/party/'+req.body.id
 	};
 
 	var reqI = http.get(options, function(res2) {
@@ -36,8 +36,12 @@ router.post('/login', function(req, res, next) {
 	  }).on('end', function() {
 	    var body = Buffer.concat(bodyChunks);
 	    console.log('BODY: ' + body);
+	    var user = JSON.parse(body);
+	
 	    // ...and/or process the entire body here.
-	    if(req.body.id < 10) {
+	    if(user.customerId < 10) {
+	    	req.session.id = user.customerId;
+	    	req.session.name = user.name;
 			res.redirect('startup/dashboard');
 		} else {
 			res.redirect('client/dashboard');
