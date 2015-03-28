@@ -10,4 +10,4 @@ var User = new Schema({
  
 mongoose.model( 'User', User );
  
-mongoose.connect( 'localhost','INGVest' );
+mongoose.connect( 'localhost','INGvest' );
