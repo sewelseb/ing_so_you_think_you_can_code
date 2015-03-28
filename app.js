@@ -80,9 +80,9 @@ if (process.env.hasOwnProperty("VCAP_SERVICES")) {
   //cloudant = env['cloudantNoSQLDB'][0].credentials;
 }
 
+host = (process.env.VCAP_APP_HOST || 'localhost');
 
-
-app.set('port', port);
+app.set('port', process.env.VCAP_APP_PORT || port);
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
