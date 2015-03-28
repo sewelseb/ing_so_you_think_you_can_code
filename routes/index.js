@@ -5,7 +5,7 @@
 var mongoose = require( 'mongoose' );
 var ObjectId = mongoose.Types.ObjectId; 
 var User = mongoose.model( 'User' );
-var Statistic = mongoose.model( 'Statistic' );
+var Startup = mongoose.model( 'Startup' );
 var utils = require( 'connect' ).utils;
 var crypto = require('crypto');
 var http = require('http');
@@ -64,6 +64,7 @@ exports.loginAction = function (req, res, next) {
 
       if ( user ) { 
         req.session.userId = user._id;
+        req.session.type = "manager";
         if(user.isAdmin) req.session.userAdmin = 1;
         res.redirect('/dashboard');
       }
@@ -105,10 +106,14 @@ exports.signinAction = function (req, res, next) {
   
       // ...and/or process the entire body here.
       if(user.customerId < 10) {
-        req.session.id = user.customerId;
+        console.log("startup");
+        req.session.type = "startup";
+        req.session.userId = user.customerId;
         req.session.name = user.name;
       res.redirect('startup/dashboard');
     } else {
+      console.log("client");
+      req.session.type = "client";
       res.redirect('client/dashboard');
     }
     })
@@ -126,6 +131,22 @@ exports.aboutShow = function (req, res, next) {
         req   : req
     });
 }
+
+exports.contactShow = function (req, res, next) {
+  res.render( 'contact', {
+        title : 'contact',
+        req   : req
+    });
+}
+
+
+
+
+
+
+
+
+
 
 exports.dashboardShow = function ( req, res, next ){
   if(!req.session.userId) res.redirect('/');
@@ -213,6 +234,59 @@ exports.statShow = function ( req, res, next ){
       });
     });
 };
+
+
+
+exports.startupShow = function ( req, res, next ){
+  if(!req.session.userId || req.session.type != "startup") res.redirect('/');
+  Startup.
+    find({ 'userId': req.session.userId}).
+    sort( '-updated_at' ).
+    exec( function ( err, startups ){
+      if( err ) return next( err );
+
+      res.render( 'startup', {
+          title : 'Startup',
+          req   : req,
+          startup : startups
+      });
+    });
+};
+
+exports.startupAction = function ( req, res, next ){
+  if(!req.session.userId || req.session.type != "startup") res.redirect('/');
+  new Startup({
+      name        : req.body.name,
+      managerId    : req.session.userId,
+      description     : 0,
+      updated_at  : Date.now(),
+      isValid   : 3
+  }).save( function ( err, user, count ){
+    if( err ) {
+      res.render( 'startup', {
+        title : 'startup',
+        req   : req,
+        error : err
+      });
+    }
+    else {
+      res.render( 'startup', {
+        title : 'startup',
+        req   : req,
+        success : "Votre startup ("+req.body.name+") vient d'être crée avec succès !"
+      });
+    }
+  });
+};
+
+exports.clientShow = function ( req, res, next ){
+  console.log("client");
+};
+
+
+
+
+
 
 exports.usersShow = function ( req, res, next ){
     User.
