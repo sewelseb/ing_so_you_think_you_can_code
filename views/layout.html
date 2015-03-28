@@ -36,7 +36,7 @@
             
           </ul>
           {% if !req.session.userId %}
-                  <form class="navbar-form pull-right" action="/login" method="post">
+                  <form class="navbar-form pull-right" action="/signin" method="post">
                     <input type="text" class="input-small" name="mail" placeholder="Email">
                     <input type="password" class="input-small" name="password" placeholder="Password">
                     <button type="submit" class="btn btn-primary" style="background-color:#FF6600; border-color:#FF6600;  ">Sign in</button>

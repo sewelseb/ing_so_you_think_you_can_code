@@ -8,6 +8,7 @@ var User = mongoose.model( 'User' );
 var Statistic = mongoose.model( 'Statistic' );
 var utils = require( 'connect' ).utils;
 var crypto = require('crypto');
+var http = require('http');
 
 exports.indexShow = function ( req, res, next ){
   res.render( 'index', {
@@ -81,6 +82,39 @@ exports.signinShow = function (req, res, next) {
 
 exports.signinAction = function (req, res, next) {
   console.log("signin");
+  var options = {
+    port: 1131,
+    host: '159.8.142.102',
+    method: 'GET',
+    path: '/ibmlgeef/sb/ing/pdm/party/'+req.body.id
+  };
+
+  console.log(options);
+  
+  var reqI = http.get(options, function(res2) {
+    console.log('STATUS: ' + res2.statusCode);
+    console.log('HEADERS: ' + JSON.stringify(res.headers));
+
+    // Buffer the body entirely for processing as a whole.
+    var bodyChunks = [];
+    res2.on('data', function(chunk) {
+      // You can process streamed parts here...
+      bodyChunks.push(chunk);
+    }).on('end', function() {
+      var body = Buffer.concat(bodyChunks);
+      console.log('BODY: ' + body);
+      var user = JSON.parse(body);
+  
+      // ...and/or process the entire body here.
+      if(user.customerId < 10) {
+        req.session.id = user.customerId;
+        req.session.name = user.name;
+      res.redirect('startup/dashboard');
+    } else {
+      res.redirect('client/dashboard');
+    }
+    })
+  });
 };
 
 exports.logoutAction = function (req, res, next) {
