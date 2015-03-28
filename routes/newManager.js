@@ -11,10 +11,12 @@ mongoose.connect('mongodb://username:9c92fbaa-ab9b-41ce-9327-364fd9d00115@159.8.
 router.post('/', function(req, res, next) {
   var db = mongoose.connection;
   //db.on('error', console.log('connection error'));
-  var manager= {lastname: req.post.lastname, firtsname: req.post.firstname};
-			collection.insert(manager, function(err, records){
-			  console.log("Record added as "+records[0]._id);
-			});
+  console.log(req.post.lastname+" "+req.post.firstname);
+  var manager= mongoose.Schema({
+  				lastname: req.post.lastname, 
+  				firtsname: req.post.firstname
+  			});
+			
   console.log('test');
   res.end('register');
 });
