@@ -4,15 +4,15 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('public/index', { title: 'Express' });
+  res.render('public/index', { session: req.session});
 });
 
 router.get('/register', function(req, res, next) {
-  res.render('public/register', { title: 'Express' });
+  res.render('public/register', { session: req.session});
 });
 
 router.get('/login', function(req, res, next) {
-  res.render('public/login', { title: 'Express' });
+  res.render('public/login', { session: req.session});
 });
 
 router.post('/login', function(req, res, next) {
@@ -55,20 +55,26 @@ router.post('/login', function(req, res, next) {
 });
 
 router.get('/about', function(req, res, next) {
-  res.render('public/about', { title: 'Express' });
+  res.render('public/about', { session: req.session});
 });
 
 router.get('/contact', function(req, res, next) {
-  res.render('public/contact', { title: 'Express' });
+  res.render('public/contact', { session: req.session});
 });
 router.get('/demoboot', function(req, res, next) {
-  res.render('public/demoboot', { title: 'Express' });
+  res.render('public/demoboot', { session: req.session});
 });
 router.get('/manager/signin-in', function(req, res, next) {
-  res.render('managerSignIn', { title: 'Express' });
+  res.render('managerSignIn', { session: req.session});
 });
+
 router.get('/generateManager', function(req, res, next) {
-  res.render('generateManager', { title: 'Express' });
+  res.render('generateManager', { session: req.session});
+});
+
+router.get('/logout', function(req, res, next) {
+	req.session.destroy;
+  	res.redirect('/');
 });
 
 
