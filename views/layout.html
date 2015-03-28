@@ -39,10 +39,16 @@
               </ul>
             </li>
           </ul>
+          {% if !name %}
           <ul class="nav navbar-nav navbar-right">
-      <li><a href="/register">Register</a></li>
-      <li><a href="/login">Sign up</a></li>
-    </ul>
+            <li><a href="/register">Register</a></li>
+            <li><a href="/login">Sign up</a></li>
+          </ul>
+          {% else  %}
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+          {% endif %}
         </div><!--/.nav-collapse -->
       </div>
     </nav>
