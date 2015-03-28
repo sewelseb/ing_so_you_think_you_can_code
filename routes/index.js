@@ -16,8 +16,7 @@ router.get('/login', function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
-	console.log(req.body.id);
-
+	
 	var options = {
 	  port: 1131,
 	  host: '159.8.142.102',
@@ -25,7 +24,6 @@ router.post('/login', function(req, res, next) {
 	  path: '/ibmlgeef/sb/ing/pdm/party/22'
 	};
 
-	console.log(options);
 	var req = http.get(options, function(res) {
 	  console.log('STATUS: ' + res.statusCode);
 	  console.log('HEADERS: ' + JSON.stringify(res.headers));
