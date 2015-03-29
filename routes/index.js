@@ -276,6 +276,7 @@ exports.startupAction = function ( req, res, next ){
       description     : req.body.description,
       updated_at  : Date.now(),
       sector: req.body.sector,
+      total:  req.body.total,
       isValid   : true
   }).save( function ( err, user, count ){
     if( err ) {

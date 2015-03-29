@@ -7,6 +7,7 @@ var Startup = new Schema({
     description		: String,
     updated_at 	: Date,
     sector: String,
+    total: String,
     isValid	: Boolean
 });
  
