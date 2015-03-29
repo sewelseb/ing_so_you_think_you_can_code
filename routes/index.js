@@ -344,8 +344,9 @@ exports.fundAction = function ( req, res, next ){
       updated_at  : Date.now(),
       sector   : req.body.sector
   }).save( function ( err, user, count ){
-    console.log("stats");
+    console.log("add stat redirige");
     if( err ) {
+      console.log("redir1");
       Startup.
       find({ 'managerId': req.session.userId}).
       sort( '-updated_at' ).
@@ -361,18 +362,22 @@ exports.fundAction = function ( req, res, next ){
       });
     }
     else {
+      console.log("redir2");
       Startup.
       find({ 'managerId': req.session.userId}).
       sort( '-updated_at' ).
       exec( function ( err, startups ){
         if( err ) return next( err );
 
+        console.log("good");
+        res.redirect('/startup/dashboard');
+/*
         res.render( 'startup', {
             title : 'Startup',
             req   : req,
             startups : startups,
             success: "success"
-        });
+        });*/
       });
     }
   });
@@ -390,13 +395,18 @@ exports.projectShow = function ( req, res, next ){
         find({'projectId': req.params.id}).
         exec( function(err, stats) {
           if(err) return next(err);
-
             new View({
               projectIdView     : req.params.id,
               projectNameView   : startup.name,
               clientIdView    : req.session.userId,
               updated_atView  : Date.now()
             }).save();
+
+
+
+            console.log("stats");
+            console.log(stats);
+
           res.render( 'project', {
           title : 'project',
           req   : req,
