@@ -104,7 +104,7 @@ app.get('/register', routes.registerShow);
 app.post('/register', routes.registerAction);
 app.get('/login', routes.loginShow); //manager
 app.post('/login', routes.loginAction); //manager
-app.get('/logout', routes.logoutAction);
+app.get('/logout', routes.logoutAction); //logout manager & client
 app.get('/signin', routes.signinShow); //client
 app.post('/signin', routes.signinAction); //client
 app.get('/about', routes.aboutShow);
@@ -119,6 +119,7 @@ app.get('/statistic', routes.statShow);
 
 app.get('/users', routes.usersShow);
 
+// access as a logged
 app.get('/startup/dashboard', routes.startupShow);
 app.post('/startup/dashboardNew', routes.startupAction);
 app.get('/client/dashboard', routes.clientShow);

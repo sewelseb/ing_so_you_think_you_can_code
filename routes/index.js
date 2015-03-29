@@ -83,7 +83,6 @@ exports.signinShow = function (req, res, next) {
 };
 
 exports.signinAction = function (req, res, next) {
-  console.log("signin");
   var options = {
     port: 1131,
     host: '159.8.142.102',
@@ -256,6 +255,7 @@ exports.startupShow = function ( req, res, next ){
 
 exports.startupAction = function ( req, res, next ){
   //check reload liste project
+  console.log(req.body.description);
   if(!req.session.userId || req.session.type != "startup") res.redirect('/');
   new Startup({
       name        : req.body.name,
