@@ -123,7 +123,7 @@ app.get('/users', routes.usersShow);
 app.get('/startup/dashboard', routes.startupShow);
 app.post('/startup/dashboard', routes.startupAction);
 app.get('/client/dashboard', routes.clientShow);
-app.post('/client/funding', routes.fundAction);
+app.post('/startup/invest-on', routes.fundAction);
 app.get('/project/:id', routes.projectShow);
 app.get('/project/:id/invest', routes.investShow);
 
