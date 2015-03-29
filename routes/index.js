@@ -401,18 +401,23 @@ exports.projectShow = function ( req, res, next ){
               clientIdView    : req.session.userId,
               updated_atView  : Date.now()
             }).save();
+            var i = 0;
+            console.log("stats: "+stats);
+            for (var key in stats){
+              i +=  parseInt(stats[key]['money']);
+            }
 
-
-
-            console.log("stats");
-            console.log(stats);
+            console.log("total "+i);
+            console.log(i/startup.total);
 
           res.render( 'project', {
           title : 'project',
           req   : req,
           startup : startup,
-          stats: stats
-      });
+          stats: stats,
+          total: i,
+          percent: (i/startup.total)*100
+          });
         })
       console.log(startup);
       
