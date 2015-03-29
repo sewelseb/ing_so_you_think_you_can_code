@@ -7,6 +7,7 @@ var ObjectId = mongoose.Types.ObjectId;
 var User = mongoose.model( 'User' );
 var Startup = mongoose.model( 'Startup' );
 var Statistic = mongoose.model( 'Statistic' );
+var View = mongoose.model( 'View' );
 var utils = require( 'connect' ).utils;
 var crypto = require('crypto');
 var http = require('http');
@@ -128,6 +129,8 @@ exports.signinAction = function (req, res, next) {
     } else {
       console.log("client");
       req.session.type = "client";
+      req.session.userId = user.customerId;
+      req.session.name = user.name;
       res.redirect('client/dashboard');
     }
     })
@@ -313,7 +316,21 @@ exports.startupAction = function ( req, res, next ){
 };
 
 exports.clientShow = function ( req, res, next ){
-  console.log("client");
+  console.log("client2");
+  if(!req.session.userId) res.redirect('/');
+  if(req.session.type == "startup") res.redirect('/startup/dashboard');
+  Startup.
+    find().
+    sort( '-updated_at' ).
+    exec( function ( err, startups ){
+      if( err ) return next( err );
+
+      res.render( 'client', {
+          title : 'client',
+          req   : req,
+          startups : startups
+      });
+    });
 };
 
 exports.fundAction = function ( req, res, next ){
@@ -329,17 +346,33 @@ exports.fundAction = function ( req, res, next ){
   }).save( function ( err, user, count ){
     console.log("stats");
     if( err ) {
-      res.render( 'startup', {
-        title : 'startup',
-        req   : req,
-        error : err
+      Startup.
+      find({ 'managerId': req.session.userId}).
+      sort( '-updated_at' ).
+      exec( function ( err, startups ){
+        if( err ) return next( err );
+
+        res.render( 'startup', {
+            title : 'Startup',
+            req   : req,
+            startups : startups,
+            success: "success"
+        });
       });
     }
     else {
-      res.render( 'startup', {
-        title : 'startup',
-        req   : req,
-        success : "Votre startup vient d'être crée avec succès !"
+      Startup.
+      find({ 'managerId': req.session.userId}).
+      sort( '-updated_at' ).
+      exec( function ( err, startups ){
+        if( err ) return next( err );
+
+        res.render( 'startup', {
+            title : 'Startup',
+            req   : req,
+            startups : startups,
+            success: "success"
+        });
       });
     }
   });
@@ -348,6 +381,7 @@ exports.fundAction = function ( req, res, next ){
 exports.projectShow = function ( req, res, next ){
   console.log('test');
   if(!req.session.userId) res.redirect('/');
+
   Startup.
     findOne({ '_id': mongoose.Types.ObjectId(req.params.id)}).
     exec( function ( err, startup ){
@@ -356,6 +390,13 @@ exports.projectShow = function ( req, res, next ){
         find({'projectId': req.params.id}).
         exec( function(err, stats) {
           if(err) return next(err);
+
+            new View({
+              projectIdView     : req.params.id,
+              projectNameView   : startup.name,
+              clientIdView    : req.session.userId,
+              updated_atView  : Date.now()
+            }).save();
           res.render( 'project', {
           title : 'project',
           req   : req,
