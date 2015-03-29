@@ -74,18 +74,15 @@
 			  </div>
               	
               <hr>
-              {% for stat in stats %}
-              	{{ totalPercu += stat.money }}
-              {% endfor %}
+              
               <div class="panel panel-default">
                   <div class="panel-heading"><h4>Processing Status</h4></div>
                   <div class="panel-body">
                     
-                    <small>Complete:{{totalPercu}}/{{startup.total}}€</small>
+                    <small>Complete:€</small>
                     <div class="progress">
-                      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: {{/}}%">
-                        <span class="sr-only">{{totalPercu/startup.total}}% Complete</span>
-                        <span class="sr-only">{{stat.length}}% Investors</span>
+                      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: %">
+                       
                       </div>
                     </div>
                     
