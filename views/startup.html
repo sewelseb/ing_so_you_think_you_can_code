@@ -3,19 +3,22 @@
 {% block title %}{{title}}{% endblock %}
 
 {% block content %}
-
-{% if users|length > 1 %}
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addAProject" style="background-color:#FF6600; border-color:#FF6600;">
-  		Add a project
-	</button>
-{% else %}
-	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addAProject" style="background-color:#FF6600; border-color:#FF6600; width=100m">
-  		Add a project
-	</button>
-{% endif %}
-
+<div class="row spacer" >
+	<div class="span4">
+		{% if users|length > 1 %}
+		    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addAProject" style="background-color:#FF6600; border-color:#FF6600;">
+		  		Add a project
+			</button>
+		{% else %}
+			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addAProject" style="background-color:#FF6600; border-color:#FF6600; width=100m">
+		  		Add a project
+			</button>
+		{% endif %}
+	</div>
+</div>
 		                    
-            
+ <div class="row top-buffer">
+ </div>           
 	
 	
 
@@ -29,6 +32,59 @@
 		<input type="submit" value="go" />
 	</form>
 	vos projets -->
+
+<div class="row spacer">
+	<div class="span4"></div>
+</div>
+	
+	<div class="row spacer">
+		{% for startup in startups %}
+		  {% if loop.first %}<ul>{% endif %}
+			
+	        <div class="panel panel-default" style="border-color: #FF6600;">
+	            <div class="panel-body">
+	            	<div class="row">
+					  <div class="col-md-8">
+						  <div class="panel-info">
+			                    <p><strong>{{ startup.name }}</strong></p>
+
+			                    <p>{{ startup.description }}</p>
+			                </div>
+			                <div class="panel-rating" style="color: #FF6600;">
+			                    <span class="glyphicon glyphicon-star"></span>
+			                    <span class="glyphicon glyphicon-star"></span>
+			                    <span class="glyphicon glyphicon-star"></span>
+			                    <span class="glyphicon glyphicon-star"></span>
+			                    <span class="glyphicon glyphicon-star"></span>
+			                    <p style="color: black;">Rate Yourself!</p>
+			                </div>
+		            	</div>
+					  <div class="col-md-4" style="text-align: right; vertical-align: middle;">
+					  	<div class="row" style="text-align: right;">
+					  		
+							  	<a href="/project/{{ startup.id }}"><button type="button" class="btn btn-primary btn-lg col-md-3 col-md-offset-8" data-toggle="modal" data-target="#addAProject" style="background-color:#FF6600; border-color:#FF6600; 	">
+							  		Details
+								</button></a>
+							
+						</div>
+						<div class="row top-buffer">
+ 						</div>  
+						<div class="row" style="text-align: right;">
+							<a href="/project/{{ startup.id }}/invest"><button type="button" class="btn btn-primary btn-lg col-md-3 col-md-offset-8" data-toggle="modal" data-target="#addAProject" style="background-color:#FF6600; border-color:#FF6600; 	">
+						  		Invest
+							</button></a>
+						</div>
+					  </div>
+					</div>
+	                
+	                
+	            </div>
+	        </div>
+	    
+		  	
+		  {% if loop.last %}</ul>{% endif %}
+		{% endfor %}
+	</div>
 
 
 	<!-- Modales -->
@@ -69,11 +125,5 @@
 	      
 	    </div>
 	  </div>
-	
-	{% for startup in startups %}
-	  {% if loop.first %}<ul>{% endif %}
-	  	<li>{{ startup.name }}</li>
-	  {% if loop.last %}</ul>{% endif %}
-	{% endfor %}
 {% endblock %}
 
