@@ -125,7 +125,7 @@ app.post('/startup/dashboard', routes.startupAction);
 app.get('/client/dashboard', routes.clientShow);
 app.post('/client/funding', routes.fundAction);
 app.get('/project/:id', routes.projectShow);
-app.post('/project/:id/invest', routes.projectShow);
+app.get('/project/:id/invest', routes.investShow);
 
 
 http.createServer(app).listen(app.get('port'), function(){

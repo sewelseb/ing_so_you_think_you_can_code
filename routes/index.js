@@ -12,6 +12,8 @@ var crypto = require('crypto');
 var http = require('http');
 
 exports.indexShow = function ( req, res, next ){
+  if(req.session.type == "startup") res.redirect('/startup/dashboard');
+  if(req.session.type == "client") res.redirect('/client/dashboard');
   res.render( 'index', {
       title : 'Home',
       req   : req,
@@ -19,6 +21,8 @@ exports.indexShow = function ( req, res, next ){
 };
 
 exports.registerShow = function ( req, res, next ){
+  if(req.session.type == "startup") res.redirect('/startup/dashboard');
+  if(req.session.type == "client") res.redirect('/client/dashboard');
     res.render( 'register', {
         title : 'Register',
         req   : req
@@ -26,6 +30,8 @@ exports.registerShow = function ( req, res, next ){
 };
 
 exports.registerAction = function ( req, res, next ){
+  if(req.session.type == "startup") res.redirect('/startup/dashboard');
+  if(req.session.type == "client") res.redirect('/client/dashboard');
   new User({
       mail        : req.body.mail,
       password    : crypto.createHmac('sha1', "bibinoulelapinou").update(req.body.password).digest('hex'),
@@ -50,6 +56,8 @@ exports.registerAction = function ( req, res, next ){
 };
 
 exports.loginShow = function (req, res, next) {
+  if(req.session.type == "startup") res.redirect('/startup/dashboard');
+  if(req.session.type == "client") res.redirect('/client/dashboard');
   res.render( 'login', {
         title : 'login',
         req   : req
@@ -57,6 +65,8 @@ exports.loginShow = function (req, res, next) {
 };
 
 exports.loginAction = function (req, res, next) {
+  if(req.session.type == "startup") res.redirect('/startup/dashboard');
+  if(req.session.type == "client") res.redirect('/client/dashboard');
   User.
     findOne({mail: req.body.mail, password: crypto.createHmac('sha1', "bibinoulelapinou").update(req.body.password).digest('hex')}).
     sort( '-updated_at' ).
@@ -76,6 +86,8 @@ exports.loginAction = function (req, res, next) {
 };
 
 exports.signinShow = function (req, res, next) {
+  if(req.session.type == "startup") res.redirect('/startup/dashboard');
+  if(req.session.type == "client") res.redirect('/client/dashboard');
   res.render( 'signin', {
         title : 'signin',
         req   : req
@@ -83,6 +95,8 @@ exports.signinShow = function (req, res, next) {
 };
 
 exports.signinAction = function (req, res, next) {
+  if(req.session.type == "startup") res.redirect('/startup/dashboard');
+  if(req.session.type == "client") res.redirect('/client/dashboard');
   var options = {
     port: 1131,
     host: '159.8.142.102',
@@ -147,9 +161,11 @@ exports.contactShow = function (req, res, next) {
 
 
 
-
+// a supprimer
 exports.dashboardShow = function ( req, res, next ){
   if(!req.session.userId) res.redirect('/');
+  if(req.session.type == "startup") res.redirect('/startup/dashboard');
+  if(req.session.type == "client") res.redirect('/client/dashboard');
   Statistic.
     find({ 'userId': req.session.userId}).
     sort( '-updated_at' ).
@@ -173,7 +189,6 @@ exports.dashboardShow = function ( req, res, next ){
       });
     });
 };
-
 exports.playShow = function ( req, res, next ){
   if(!req.session.userId) res.redirect('/');
     res.render( 'play', {
@@ -181,7 +196,6 @@ exports.playShow = function ( req, res, next ){
         req   : req
     });
 };
-
 exports.playAction = function ( req, res, next ){
   new Statistic({
       result      : req.body.result,
@@ -202,7 +216,6 @@ exports.playAction = function ( req, res, next ){
     }
   });
 };
-
 exports.userShow = function ( req, res, next ){
   if(!req.session.userId) res.redirect('/');
     User.
@@ -218,7 +231,6 @@ exports.userShow = function ( req, res, next ){
       });
     });
 };
-
 exports.statShow = function ( req, res, next ){
   if(!req.session.userId) res.redirect('/');
   Statistic.
@@ -238,7 +250,8 @@ exports.statShow = function ( req, res, next ){
 
 
 exports.startupShow = function ( req, res, next ){
-  if(!req.session.userId || req.session.type != "startup") res.redirect('/');
+  if(!req.session.userId) res.redirect('/');
+  if(req.session.type == "client") res.redirect('/client/dashboard');
   Startup.
     find({ 'managerId': req.session.userId}).
     sort( '-updated_at' ).
@@ -255,7 +268,8 @@ exports.startupShow = function ( req, res, next ){
 
 exports.startupAction = function ( req, res, next ){
   //check reload liste project
-  if(!req.session.userId || req.session.type != "startup") res.redirect('/');
+  if(!req.session.userId) res.redirect('/');
+  if(req.session.type == "client") res.redirect('/client/dashboard');
   new Startup({
       name        : req.body.name,
       managerId    : req.session.userId,
@@ -303,7 +317,6 @@ exports.clientShow = function ( req, res, next ){
 exports.fundAction = function ( req, res, next ){
   //check reload liste project
   if(!req.session.userId) res.redirect('/');
-  console.log(req.body.money);
   new Statistic({
       projectId        : req.body.startup,
       clientId    : req.session.userId,
@@ -332,7 +345,22 @@ exports.fundAction = function ( req, res, next ){
 
 exports.projectShow = function ( req, res, next ){
   if(!req.session.userId) res.redirect('/');
-  console.log(mongoose.Types.ObjectId(req.params.id));
+  Startup.
+    findOne({ '_id': mongoose.Types.ObjectId(req.params.id)}).
+    exec( function ( err, startup ){
+      if( err ) return next( err );
+
+      console.log(startup);
+      res.render( 'project', {
+          title : 'project',
+          req   : req,
+          startup : startup
+      });
+    });
+};
+
+exports.investShow = function ( req, res, next ){
+  if(!req.session.userId) res.redirect('/');
   Startup.
     findOne({ '_id': mongoose.Types.ObjectId(req.params.id)}).
     exec( function ( err, startup ){
@@ -349,7 +377,7 @@ exports.projectShow = function ( req, res, next ){
 
 
 
-
+// API
 exports.usersShow = function ( req, res, next ){
     User.
     find().
