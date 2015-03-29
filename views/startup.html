@@ -156,8 +156,8 @@
 									
 						</div>
 						 <input type="text" name="projectId" id="startUpId" class="form-control" value="" style="visibility: hidden"/>
-						 <input type="text" name="name" id="startUpName" class="form-control" value="" style="visibility: hidden"/>
-						 <input type="text" name="sector" id="startUpSector" class="form-control" value="" style="visibility: hidden"/>
+						 <input type="text" name="name" id="projectName" class="form-control" value="" style="visibility: hidden"/>
+						 <input type="text" name="sector" id="projectSector" class="form-control" value="" style="visibility: hidden"/>
 						
 	                    	  <div class="col-sm-12 controls" style="text-align: right;">
 	                              <input type="submit" id="btn-login" href="#" class="btn btn-success" style="background-color:#FF6600; border-color:#FF6600;  align: right;" value="Go!" />
@@ -176,8 +176,10 @@
 	  <script type="text/javascript">
 	  	function updaterIdProjetModal(id, sector, projectName)
 	  		{
+
 	  			document.getElementById('startUpId').value=id;
 	  			document.getElementById('projectName').value=projectName;
+	  			
 	  			document.getElementById('projectSector').value=sector;
 	  			
 	  		}
