@@ -320,7 +320,7 @@ exports.fundAction = function ( req, res, next ){
   //check reload liste project
   if(!req.session.userId) res.redirect('/');
   new Statistic({
-      projectId        : req.body.startup,
+      projectId        : req.body.projectId,
       clientId    : req.session.userId,
       projectName : req.body.name,
       money     : req.body.money,
@@ -351,6 +351,9 @@ exports.projectShow = function ( req, res, next ){
     findOne({ '_id': mongoose.Types.ObjectId(req.params.id)}).
     exec( function ( err, startup ){
       if( err ) return next( err );
+          
+
+
 
       console.log(startup);
       res.render( 'project', {
