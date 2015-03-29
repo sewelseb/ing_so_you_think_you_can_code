@@ -1,3 +1,36 @@
+<<<<<<< HEAD
 projet : {% for project in startup %}
 	{{project.name}}
 {% endfor %}
+=======
+
+projet : {{project}}
+{% extends 'layout.html' %}
+
+{% block title %}{{title}}{% endblock %}
+{% block css %}
+    <link href="css/modern-business.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    {% if {{ error }} %}
+    <div class="alert alert-error">
+        {{ error }}
+    </div>
+    {% endif %}
+    {% if {{ success }} %}
+    <div class="alert alert-success">
+        {{ success }}
+    </div>
+    {% endif %}
+
+
+
+
+    <!-- Page Content -->
+    
+
+{% endblock %}
+
+
+
+>>>>>>> 0d61555d2b2617af4384a813b2d283547e1ed19d
