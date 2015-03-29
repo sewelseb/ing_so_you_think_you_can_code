@@ -332,11 +332,13 @@ exports.fundAction = function ( req, res, next ){
 
 exports.projectShow = function ( req, res, next ){
   if(!req.session.userId) res.redirect('/');
+  console.log(mongoose.Types.ObjectId(req.params.id));
   Startup.
-    find({ '_id': req.params.id}).
+    find({ '_id': mongoose.Types.ObjectId(req.params.id)}).
     exec( function ( err, startup ){
       if( err ) return next( err );
 
+      console.log(startup);
       res.render( 'project', {
           title : 'project',
           req   : req,
