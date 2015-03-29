@@ -134,12 +134,14 @@
 				                </div>
 				            </li>
 				        </ul>
-				        <form class="form-inline" role="form">
+				        <form class="form-inline" role="form" method="POST" action="/comment">
 				            <div class="form-group">
-				                <input class="form-control" type="text" placeholder="Your comments" />
+				                <input class="form-control" name="comment" type="text" placeholder="Your comment" />
+				                <input  name="startUpId" type="text" value="{{startup.id}}" style="display: none;" />
+				                
 				            </div>
 				            <div class="form-group">
-				                <button class="btn btn-default">Add</button>
+				                <button type="submit" class="btn btn-default">Add</button>
 				            </div>
 				        </form>
 				    </div>
