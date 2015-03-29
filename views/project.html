@@ -1,1 +1,3 @@
-projet : {{startup}}
+projet : {% for project in startup %}
+	{{project.name}}
+{% endfor %}

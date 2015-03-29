@@ -334,7 +334,7 @@ exports.projectShow = function ( req, res, next ){
   if(!req.session.userId) res.redirect('/');
   console.log(mongoose.Types.ObjectId(req.params.id));
   Startup.
-    find({ '_id': mongoose.Types.ObjectId(req.params.id)}).
+    findOne({ '_id': mongoose.Types.ObjectId(req.params.id)}).
     exec( function ( err, startup ){
       if( err ) return next( err );
 
