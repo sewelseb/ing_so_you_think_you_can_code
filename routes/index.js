@@ -255,7 +255,6 @@ exports.startupShow = function ( req, res, next ){
 
 exports.startupAction = function ( req, res, next ){
   //check reload liste project
-  console.log(req.body.description);
   if(!req.session.userId || req.session.type != "startup") res.redirect('/');
   new Startup({
       name        : req.body.name,
@@ -266,28 +265,32 @@ exports.startupAction = function ( req, res, next ){
   }).save( function ( err, user, count ){
     if( err ) {
       Startup.
-    find({ 'managerId': req.session.userId}).
-    sort( '-updated_at' ).
-    exec( function ( err, startups ){
-      if( err ) return next( err );
+      find({ 'managerId': req.session.userId}).
+      sort( '-updated_at' ).
+      exec( function ( err, startups ){
+        if( err ) return next( err );
 
-      res.render( 'startup', {
-          title : 'Startup',
-          req   : req,
-          startups : startups
-      });
-    });
-      res.render( 'startup', {
-        title : 'startup',
-        req   : req,
-        error : err
+        res.render( 'startup', {
+            title : 'Startup',
+            req   : req,
+            startups : startups
+        });
       });
     }
+
     else {
-      res.render( 'startup', {
-        title : 'startup',
-        req   : req,
-        success : "Votre startup ("+req.body.name+") vient d'être crée avec succès !"
+      Startup.
+      find({ 'managerId': req.session.userId}).
+      sort( '-updated_at' ).
+      exec( function ( err, startups ){
+        if( err ) return next( err );
+
+        res.render( 'startup', {
+            title : 'Startup',
+            req   : req,
+            startups : startups,
+            success: "success"
+        });
       });
     }
   });
@@ -304,6 +307,7 @@ exports.fundAction = function ( req, res, next ){
   new Statistic({
       projectId        : req.body.startup,
       clientId    : req.session.userId,
+      projectName : req.body.name,
       money     : req.body.money,
       updated_at  : Date.now(),
       sector   : req.body.sector
@@ -324,6 +328,21 @@ exports.fundAction = function ( req, res, next ){
       });
     }
   });
+};
+
+exports.projectShow = function ( req, res, next ){
+  if(!req.session.userId) res.redirect('/');
+  Startup.
+    find({ '_id': req.params.id}).
+    exec( function ( err, startup ){
+      if( err ) return next( err );
+
+      res.render( 'project', {
+          title : 'project',
+          req   : req,
+          startup : startup
+      });
+    });
 };
 
 

@@ -121,9 +121,10 @@ app.get('/users', routes.usersShow);
 
 // access as a logged
 app.get('/startup/dashboard', routes.startupShow);
-app.post('/startup/dashboardNew', routes.startupAction);
+app.post('/startup/dashboard', routes.startupAction);
 app.get('/client/dashboard', routes.clientShow);
 app.post('/client/funding', routes.fundAction);
+app.get('/project/:id', routes.projectShow);
 
 
 http.createServer(app).listen(app.get('port'), function(){
