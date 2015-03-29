@@ -71,7 +71,7 @@
 						<div class="row top-buffer">
  						</div>  
 						<div class="row" style="text-align: right;">
-							<button type="button" class="btn btn-primary btn-lg col-md-3 col-md-offset-8" data-toggle="modal" data-target="#modalInvest" style="background-color:#FF6600; border-color:#FF6600; 	" onclick="updaterIdProjetModal('{{startup.id}}')">
+							<button type="button" class="btn btn-primary btn-lg col-md-3 col-md-offset-8" data-toggle="modal" data-target="#modalInvest" style="background-color:#FF6600; border-color:#FF6600; 	" onclick="updaterIdProjetModal('{{startup.id}}', '{{startup.sector}}', '{{startup.name}}')">
 						  		Invest
 							</button>
 						</div>
@@ -156,6 +156,8 @@
 									
 						</div>
 						 <input type="text" name="projectId" id="startUpId" class="form-control" value="" style="visibility: hidden"/>
+						 <input type="text" name="name" id="startUpName" class="form-control" value="" style="visibility: hidden"/>
+						 <input type="text" name="sector" id="startUpSector" class="form-control" value="" style="visibility: hidden"/>
 						
 	                    	  <div class="col-sm-12 controls" style="text-align: right;">
 	                              <input type="submit" id="btn-login" href="#" class="btn btn-success" style="background-color:#FF6600; border-color:#FF6600;  align: right;" value="Go!" />
@@ -172,9 +174,11 @@
 	    </div>
 	  </div>
 	  <script type="text/javascript">
-	  	function updaterIdProjetModal(id)
+	  	function updaterIdProjetModal(id, sector, projectName)
 	  		{
 	  			document.getElementById('startUpId').value=id;
+	  			document.getElementById('projectName').value=projectName;
+	  			document.getElementById('projectSector').value=sector;
 	  			
 	  		}
 	  </script>
