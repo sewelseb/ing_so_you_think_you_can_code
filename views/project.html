@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-projet : {% for project in startup %}
-	{{project.name}}
-{% endfor %}
-=======
-
-projet : {{project}}
-=======
->>>>>>> a1ac8973f412fce6fee61b0d945744b61759645a
 {% extends 'layout.html' %}
 
 {% block title %}{{title}}{% endblock %}
@@ -56,8 +46,12 @@ projet : {{project}}
 	   <div class="row">
             <!-- center left-->	
          	<div class="col-md-7">
-			  <div class="well">Description </div>
-              	{{startup.description}}
+			  <div class="well">Description 
+			  	<p>
+			  		{{startup.description}}
+			  	</p>
+			  </div>
+              	
               <hr>
               
               <div class="panel panel-default">
@@ -91,7 +85,6 @@ projet : {{project}}
             <!--center-right-->
         	<div class="col-md-5">
  
-                <hr>
               	<div class="detailBox">
 				    <div class="titleBox">
 				      <label>Messages</label>
@@ -108,7 +101,7 @@ projet : {{project}}
 				                  <img src="http://lorempixel.com/50/50/people/6" />
 				                </div>
 				                <div class="commentText">
-				                    <p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
+				                    <p class="">Hello, how mutch client do you already have?</p> <span class="date sub-text">on March 5th, 2015</span>
 
 				                </div>
 				            </li>
@@ -117,7 +110,7 @@ projet : {{project}}
 				                  <img src="http://lorempixel.com/50/50/people/7" />
 				                </div>
 				                <div class="commentText">
-				                    <p class="">Hello this is a test comment and this comment is particularly very long and it goes on and on and on.</p> <span class="date sub-text">on March 5th, 2014</span>
+				                    <p class="">Hello .</p> <span class="date sub-text">on March 5th, 2015</span>
 
 				                </div>
 				            </li>
