@@ -346,21 +346,25 @@ exports.fundAction = function ( req, res, next ){
 };
 
 exports.projectShow = function ( req, res, next ){
+  console.log('test');
   if(!req.session.userId) res.redirect('/');
   Startup.
     findOne({ '_id': mongoose.Types.ObjectId(req.params.id)}).
     exec( function ( err, startup ){
       if( err ) return next( err );
-          
-
-
-
-      console.log(startup);
-      res.render( 'project', {
+      Statistic.
+        find({'projectId': req.params.id}).
+        exec( function(err, stats) {
+          if(err) return next(err);
+          res.render( 'project', {
           title : 'project',
           req   : req,
-          startup : startup
+          startup : startup,
+          stats: stats
       });
+        })
+      console.log(startup);
+      
     });
 };
 
